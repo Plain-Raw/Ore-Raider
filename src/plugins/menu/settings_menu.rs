@@ -42,9 +42,9 @@ pub fn settings_menu_setup(mut commands: Commands) {
                         height: Val::Vh(100.0),
                         flex_direction: FlexDirection::Column,
                         align_items: AlignItems::Center,
+                        justify_content: JustifyContent::Center,
                         ..default()
                     },
-                    background_color:  colors::BACKGROUND_COLOR.into(),
                     ..default()
                 })
                 .with_children(|parent| {

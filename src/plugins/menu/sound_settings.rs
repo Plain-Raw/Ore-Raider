@@ -42,7 +42,6 @@ pub fn sound_settings_menu_setup(mut commands: Commands, volume: Res<Volume>) {
                         align_items: AlignItems::Center,
                         ..default()
                     },
-                    background_color:  colors::BACKGROUND_COLOR.into(),
                     ..default()
                 })
                 .with_children(|parent| {

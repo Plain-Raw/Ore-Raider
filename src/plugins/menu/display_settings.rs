@@ -58,7 +58,6 @@ pub fn display_settings_menu_setup(mut commands: Commands, display_quality: Res<
                                 align_items: AlignItems::Center,
                                 ..default()
                             },
-                            background_color:  BACKGROUND_COLOR.into(),
                             ..default()
                         })
                         .with_children(|parent| {

@@ -1,6 +1,7 @@
 use bevy::asset::AssetServer;
 use bevy::hierarchy::BuildChildren;
 use bevy::prelude::{AlignItems, ButtonBundle, Commands, default, FlexDirection, ImageBundle, JustifyContent, NodeBundle, PositionType, Res, Style, TextBundle, TextStyle, UiImage, UiRect, Val};
+use crate::plugins::colors;
 use crate::plugins::colors::{BACKGROUND_COLOR, NORMAL_BUTTON, TEXT_COLOR};
 use crate::plugins::menu::{MenuButtonAction, OnMainMenuScreen};
 
@@ -28,6 +29,19 @@ pub fn main_menu_setup(mut commands: Commands, asset_server: Res<AssetServer>) {
         ..default()
     };
 
+    let background = asset_server.load("backgrounds/campfire-menu-background.png");
+
+    commands.spawn((ImageBundle {
+        style: Style {
+            width: Val::Px(1920.0),
+            height: Val::Px(1000.0),
+            ..default()
+        },
+        image: UiImage::new(background),
+        ..default()
+    }));
+
+
     commands
         .spawn((
             NodeBundle {
@@ -50,18 +64,19 @@ pub fn main_menu_setup(mut commands: Commands, asset_server: Res<AssetServer>) {
                         height: Val::Vh(100.0),
                         flex_direction: FlexDirection::Column,
                         align_items: AlignItems::Center,
+                        justify_content: JustifyContent::Center,
                         ..default()
                     },
-                    background_color: BACKGROUND_COLOR.into(),
                     ..default()
                 })
                 .with_children(|parent| {
+
                     // Display the game name
                     parent.spawn(
                         TextBundle::from_section(
                             "The Last Dawn",
                             TextStyle {
-                                font_size: 80.0,
+                                font_size: 100.0,
                                 color: TEXT_COLOR,
                                 ..default()
                             },
