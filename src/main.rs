@@ -1,10 +1,11 @@
-mod test_system;
+mod plugins;
+mod gamestate;
 
 use bevy::prelude::*;
 
 fn main() {
     App::new()
-        .add_systems(Update, test_system::hello_world)
+        .add_plugins((plugins::init::InitPlugin, plugins::game::game_plugin))
         .run();
 }
 
