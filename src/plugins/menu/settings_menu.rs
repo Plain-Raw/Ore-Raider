@@ -1,5 +1,5 @@
 use bevy::hierarchy::BuildChildren;
-use bevy::prelude::{AlignItems, ButtonBundle, Commands, default, FlexDirection, JustifyContent, NodeBundle, Style, TextBundle, TextStyle, UiRect, Val};
+use bevy::prelude::{AlignItems, ButtonBundle, Commands, default, FlexDirection, JustifyContent, NodeBundle, Res, Style, TextBundle, TextStyle, UiRect, Val};
 use crate::plugins::colors;
 use crate::plugins::colors::{NORMAL_BUTTON, TEXT_COLOR};
 use crate::plugins::menu::{MenuButtonAction, OnSettingsMenuScreen};
@@ -38,6 +38,8 @@ pub fn settings_menu_setup(mut commands: Commands) {
             parent
                 .spawn(NodeBundle {
                     style: Style {
+                        width: Val::Vh(100.0),
+                        height: Val::Vh(100.0),
                         flex_direction: FlexDirection::Column,
                         align_items: AlignItems::Center,
                         ..default()

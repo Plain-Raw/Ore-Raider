@@ -2,6 +2,7 @@ mod display_settings;
 mod sound_settings;
 mod main_menu;
 mod settings_menu;
+mod music;
 
 use bevy::{app::AppExit, prelude::*};
 use crate::gamestate::GameState;
@@ -9,15 +10,16 @@ use crate::plugins::colors::{ HOVERED_BUTTON, HOVERED_PRESSED_BUTTON, NORMAL_BUT
 use crate::plugins::init::setup::{DisplayQuality, Volume};
 use crate::plugins::menu::display_settings::display_settings_menu_setup;
 use crate::plugins::menu::main_menu::main_menu_setup;
-use crate::plugins::menu::settings_menu::settings_menu_setup;
+use crate::plugins::menu::settings_menu::{settings_menu_setup};
 use crate::plugins::menu::sound_settings::sound_settings_menu_setup;
 
 pub fn menu_plugin(app: &mut App) {
     app
         .init_state::<MenuState>()
-        .add_systems(OnEnter(GameState::Menu), menu_setup)
+        .add_systems(OnEnter(GameState::Menu), (menu_setup,music::pause, music::setup).chain())
+        .add_systems(OnExit(GameState::Menu), music::pause)
         // Systems to handle the main menu screen
-        .add_systems(OnEnter(MenuState::Main), main_menu_setup)
+        .add_systems(OnEnter(MenuState::Main), main_menu_setup )
         .add_systems(OnExit(MenuState::Main), despawn_screen::<OnMainMenuScreen>)
         // Systems to handle the settings menu screen
         .add_systems(OnEnter(MenuState::Settings), settings_menu_setup)
