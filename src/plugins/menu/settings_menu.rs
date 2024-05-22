@@ -1,8 +1,10 @@
-use bevy::hierarchy::BuildChildren;
-use bevy::prelude::{AlignItems, ButtonBundle, Commands, default, FlexDirection, JustifyContent, NodeBundle, Res, Style, TextBundle, TextStyle, UiRect, Val};
-use crate::plugins::colors;
 use crate::plugins::colors::{NORMAL_BUTTON, TEXT_COLOR};
 use crate::plugins::menu::{MenuButtonAction, OnSettingsMenuScreen};
+use bevy::hierarchy::BuildChildren;
+use bevy::prelude::{
+    default, AlignItems, ButtonBundle, Commands, FlexDirection, JustifyContent, NodeBundle, Style,
+    TextBundle, TextStyle, UiRect, Val,
+};
 
 pub fn settings_menu_setup(mut commands: Commands) {
     let button_style = Style {
@@ -72,4 +74,3 @@ pub fn settings_menu_setup(mut commands: Commands) {
                 });
         });
 }
-

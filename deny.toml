@@ -1,0 +1,23 @@
+[licenses]
+allow = ["MIT", "Unicode-DFS-2016", "Apache-2.0", "BSD-3-Clause", "Unlicense", "Zlib", "ISC", "CC0-1.0", "MIT-0", "BSD-2-Clause"]
+private = { ignore = true }
+
+[[licenses.clarify]]
+name = "ring"
+expression = "MIT AND ISC AND OpenSSL"
+license-files = [
+    { path = "LICENSE", hash = 0xbd0eed23 }
+]
+
+[[licenses.clarify]]
+name = "surrealdb"
+expression = "Apache-2.0"
+license-files = [
+    { path = "LICENSE", hash = 0x08ad5bad }
+]
+
+[sources]
+allow-git = []
+
+[bans]
+multiple-versions = "allow"

@@ -1,19 +1,17 @@
-use std::time::Duration;
-use bevy::prelude::*;
-use bevy_tweening::{Animator, Delay, EaseFunction, Tween, TweeningPlugin};
-use bevy_tweening::lens::TransformScaleLens;
 use crate::gamestate::GameState;
 use crate::plugins::colors;
 use crate::plugins::menu::despawn_screen;
+use bevy::prelude::*;
+use bevy_tweening::lens::TransformScaleLens;
+use bevy_tweening::{Animator, EaseFunction, Tween, TweeningPlugin};
+use std::time::Duration;
 
 const INIT_TRANSITION_DONE: u64 = 1;
-
 
 // This plugin will display a splash screen with Bevy logo for 1 second before switching to the menu
 pub fn splash_plugin(app: &mut App) {
     // As this plugin is managing the splash screen, it will focus on the state `GameState::Splash`
-    app
-        .add_plugins(TweeningPlugin)
+    app.add_plugins(TweeningPlugin)
         // When entering the state, spawn everything needed for this screen
         .add_systems(OnEnter(GameState::Splash), splash_setup)
         // While in this state, run the `countdown` system
@@ -31,8 +29,7 @@ struct OnSplashScreen;
 struct SplashTimer(Timer);
 
 fn splash_setup(mut commands: Commands, asset_server: Res<AssetServer>) {
-
-    commands.spawn((NodeBundle {
+    commands.spawn(NodeBundle {
         style: Style {
             width: Val::Px(1920.0),
             height: Val::Px(1500.0),
@@ -40,7 +37,7 @@ fn splash_setup(mut commands: Commands, asset_server: Res<AssetServer>) {
         },
         background_color: colors::BACKGROUND_COLOR.into(),
         ..default()
-    }));
+    });
 
     let icon = asset_server.load("branding/logo-color.png");
     // Display the logo
@@ -59,7 +56,6 @@ fn splash_setup(mut commands: Commands, asset_server: Res<AssetServer>) {
             OnSplashScreen,
         ))
         .with_children(|parent| {
-
             let tween_scale = Tween::new(
                 EaseFunction::SineInOut,
                 Duration::from_millis(2500),
@@ -68,20 +64,22 @@ fn splash_setup(mut commands: Commands, asset_server: Res<AssetServer>) {
                     end: Vec3::ONE,
                 },
             )
-                .with_completed_event(INIT_TRANSITION_DONE);
-;
-            let animator =  Animator::new(tween_scale);
+            .with_completed_event(INIT_TRANSITION_DONE);
+            let animator = Animator::new(tween_scale);
 
-            parent.spawn((ImageBundle {
-                style: Style {
-                    width: Val::Px(1920.0),
-                    height: Val::Px(1500.0),
+            parent.spawn((
+                ImageBundle {
+                    style: Style {
+                        width: Val::Px(1920.0),
+                        height: Val::Px(1500.0),
+                        ..default()
+                    },
+
+                    image: UiImage::new(icon),
                     ..default()
                 },
-
-                image: UiImage::new(icon),
-                ..default()
-            },  animator));
+                animator,
+            ));
         });
     commands.spawn(AudioBundle {
         source: asset_server.load("sounds/drop.ogg"),
@@ -101,5 +99,3 @@ fn countdown(
         game_state.set(GameState::Menu);
     }
 }
-
-

@@ -1,6 +1,5 @@
-
-mod splash;
+mod colors;
+pub(crate) mod game;
 pub mod init;
 mod menu;
-pub(crate) mod game;
-mod colors;
+mod splash;

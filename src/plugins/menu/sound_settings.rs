@@ -1,9 +1,12 @@
-use bevy::hierarchy::BuildChildren;
-use bevy::prelude::{AlignItems, ButtonBundle, Commands, default, FlexDirection, JustifyContent, NodeBundle, Res, Style, TextBundle, TextStyle, UiRect, Val};
 use crate::plugins::colors;
 use crate::plugins::colors::{NORMAL_BUTTON, TEXT_COLOR};
 use crate::plugins::init::setup::Volume;
 use crate::plugins::menu::{MenuButtonAction, OnSoundSettingsMenuScreen, SelectedOption};
+use bevy::hierarchy::BuildChildren;
+use bevy::prelude::{
+    default, AlignItems, ButtonBundle, Commands, FlexDirection, JustifyContent, NodeBundle, Res,
+    Style, TextBundle, TextStyle, UiRect, Val,
+};
 
 pub fn sound_settings_menu_setup(mut commands: Commands, volume: Res<Volume>) {
     let button_style = Style {
@@ -51,7 +54,7 @@ pub fn sound_settings_menu_setup(mut commands: Commands, volume: Res<Volume>) {
                                 align_items: AlignItems::Center,
                                 ..default()
                             },
-                            background_color:  colors::BACKGROUND_COLOR.into(),
+                            background_color: colors::BACKGROUND_COLOR.into(),
                             ..default()
                         })
                         .with_children(|parent| {

@@ -1,13 +1,12 @@
-use bevy::hierarchy::{BuildChildren, ChildBuilder};
-use bevy::prelude::{AlignItems, ButtonBundle, Commands, default, FlexDirection, JustifyContent, NodeBundle, Res, Style, TextBundle, TextStyle, UiRect, Val};
 use crate::plugins::colors;
-use crate::plugins::colors::{BACKGROUND_COLOR, NORMAL_BUTTON, TEXT_COLOR};
+use crate::plugins::colors::{NORMAL_BUTTON, TEXT_COLOR};
 use crate::plugins::init::setup::DisplayQuality;
 use crate::plugins::menu::{MenuButtonAction, OnDisplaySettingsMenuScreen, SelectedOption};
-
-
-
-
+use bevy::hierarchy::{BuildChildren, ChildBuilder};
+use bevy::prelude::{
+    default, AlignItems, ButtonBundle, Commands, FlexDirection, JustifyContent, NodeBundle, Res,
+    Style, TextBundle, TextStyle, UiRect, Val,
+};
 
 pub fn display_settings_menu_setup(mut commands: Commands, display_quality: Res<DisplayQuality>) {
     let button_style = Style {
@@ -46,7 +45,7 @@ pub fn display_settings_menu_setup(mut commands: Commands, display_quality: Res<
                         align_items: AlignItems::Center,
                         ..default()
                     },
-                    background_color:  colors::BACKGROUND_COLOR.into(),
+                    background_color: colors::BACKGROUND_COLOR.into(),
                     ..default()
                 })
                 .with_children(|parent| {
@@ -62,7 +61,12 @@ pub fn display_settings_menu_setup(mut commands: Commands, display_quality: Res<
                         })
                         .with_children(|parent| {
                             // Display a label for the current setting
-                            display_settings_button(display_quality, &button_style, &button_text_style, parent);
+                            display_settings_button(
+                                display_quality,
+                                &button_style,
+                                &button_text_style,
+                                parent,
+                            );
                         });
                     // Display the back button to return to the settings screen
                     back_button_to_settings(button_style, button_text_style, parent);
@@ -70,7 +74,12 @@ pub fn display_settings_menu_setup(mut commands: Commands, display_quality: Res<
         });
 }
 
-fn display_settings_button(display_quality: Res<DisplayQuality>, button_style: &Style, button_text_style: &TextStyle, parent: &mut ChildBuilder) {
+fn display_settings_button(
+    display_quality: Res<DisplayQuality>,
+    button_style: &Style,
+    button_text_style: &TextStyle,
+    parent: &mut ChildBuilder,
+) {
     parent.spawn(TextBundle::from_section(
         "Display Quality",
         button_text_style.clone(),
@@ -105,7 +114,11 @@ fn display_settings_button(display_quality: Res<DisplayQuality>, button_style: &
     }
 }
 
-fn back_button_to_settings(button_style: Style, button_text_style: TextStyle, parent: &mut ChildBuilder) {
+fn back_button_to_settings(
+    button_style: Style,
+    button_text_style: TextStyle,
+    parent: &mut ChildBuilder,
+) {
     parent
         .spawn((
             ButtonBundle {

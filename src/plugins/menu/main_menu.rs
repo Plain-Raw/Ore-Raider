@@ -1,9 +1,11 @@
-use bevy::asset::AssetServer;
-use bevy::hierarchy::BuildChildren;
-use bevy::prelude::{AlignItems, ButtonBundle, Commands, default, FlexDirection, ImageBundle, JustifyContent, NodeBundle, PositionType, Res, Style, TextBundle, TextStyle, UiImage, UiRect, Val};
-use crate::plugins::colors;
 use crate::plugins::colors::{BACKGROUND_COLOR, NORMAL_BUTTON, TEXT_COLOR};
 use crate::plugins::menu::{MenuButtonAction, OnMainMenuScreen};
+use bevy::asset::AssetServer;
+use bevy::hierarchy::BuildChildren;
+use bevy::prelude::{
+    default, AlignItems, ButtonBundle, Commands, FlexDirection, ImageBundle, JustifyContent,
+    NodeBundle, PositionType, Res, Style, TextBundle, TextStyle, UiImage, UiRect, Val,
+};
 
 pub fn main_menu_setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     // Common style for all buttons on the screen
@@ -31,7 +33,7 @@ pub fn main_menu_setup(mut commands: Commands, asset_server: Res<AssetServer>) {
 
     let background = asset_server.load("backgrounds/insect-background.png");
 
-    commands.spawn((ImageBundle {
+    commands.spawn(ImageBundle {
         style: Style {
             width: Val::Percent(100.0),
             height: Val::Percent(100.0),
@@ -39,8 +41,7 @@ pub fn main_menu_setup(mut commands: Commands, asset_server: Res<AssetServer>) {
         },
         image: UiImage::new(background),
         ..default()
-    }));
-
+    });
 
     commands
         .spawn((
@@ -70,7 +71,6 @@ pub fn main_menu_setup(mut commands: Commands, asset_server: Res<AssetServer>) {
                     ..default()
                 })
                 .with_children(|parent| {
-
                     // Display the game name
                     parent.spawn(
                         TextBundle::from_section(
@@ -81,10 +81,10 @@ pub fn main_menu_setup(mut commands: Commands, asset_server: Res<AssetServer>) {
                                 ..default()
                             },
                         )
-                            .with_style(Style {
-                                margin: UiRect::all(Val::Px(50.0)),
-                                ..default()
-                            }),
+                        .with_style(Style {
+                            margin: UiRect::all(Val::Px(50.0)),
+                            ..default()
+                        }),
                     );
 
                     // Display three buttons for each action available from the main menu:

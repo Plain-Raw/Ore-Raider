@@ -1,5 +1,7 @@
-mod plugins;
+#![allow(clippy::type_complexity)]
+
 mod gamestate;
+mod plugins;
 
 use bevy::prelude::*;
 
@@ -8,4 +10,3 @@ fn main() {
         .add_plugins((plugins::init::InitPlugin, plugins::game::game_plugin))
         .run();
 }
-

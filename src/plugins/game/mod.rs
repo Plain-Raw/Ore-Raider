@@ -1,10 +1,9 @@
-
-use bevy::prelude::*;
 use crate::gamestate::GameState;
 use crate::plugins::colors;
 use crate::plugins::colors::TEXT_COLOR;
 use crate::plugins::init::setup::{DisplayQuality, Volume};
 use crate::plugins::menu::despawn_screen;
+use bevy::prelude::*;
 
 // This plugin will contain the game. In this case, it's just be a screen that will
 // display the current settings for 5 seconds before returning to the menu
@@ -21,11 +20,7 @@ struct OnGameScreen;
 #[derive(Resource, Deref, DerefMut)]
 struct GameTimer(Timer);
 
-fn game_setup(
-    mut commands: Commands,
-    display_quality: Res<DisplayQuality>,
-    volume: Res<Volume>,
-) {
+fn game_setup(mut commands: Commands, display_quality: Res<DisplayQuality>, volume: Res<Volume>) {
     commands
         .spawn((
             NodeBundle {
@@ -68,10 +63,10 @@ fn game_setup(
                                 ..default()
                             },
                         )
-                            .with_style(Style {
-                                margin: UiRect::all(Val::Px(50.0)),
-                                ..default()
-                            }),
+                        .with_style(Style {
+                            margin: UiRect::all(Val::Px(50.0)),
+                            ..default()
+                        }),
                     );
                     parent.spawn(
                         TextBundle::from_sections([
@@ -100,10 +95,10 @@ fn game_setup(
                                 },
                             ),
                         ])
-                            .with_style(Style {
-                                margin: UiRect::all(Val::Px(50.0)),
-                                ..default()
-                            }),
+                        .with_style(Style {
+                            margin: UiRect::all(Val::Px(50.0)),
+                            ..default()
+                        }),
                     );
                 });
         });
