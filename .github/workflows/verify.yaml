@@ -1,0 +1,20 @@
+name: Verify
+
+permissions:
+  contents: read
+  packages: read
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-hack@0.5,cargo-deny@0.13,just@2,cargo-edit@0.12
+
+      - run: just verify
