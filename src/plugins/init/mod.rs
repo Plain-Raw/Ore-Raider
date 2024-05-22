@@ -23,7 +23,7 @@ impl Plugin for InitPlugin {
                 })
                 .set(WindowPlugin {
                     primary_window: Some(Window {
-                        title: "test-title".into(),
+                        title: "OreRaider".into(),
                         name: Some("bevy.app".into()),
                         resolution: (1900., 1000.).into(),
                         present_mode: PresentMode::AutoVsync,
