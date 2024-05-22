@@ -21,6 +21,10 @@ lint:
 fmt:
     cargo fmt
 
+ci-tools:
+    sudo apt-get install libasound2-dev
+    sudo apt-get install libudev-dev
+
 [unix]
 install-tools:
     sudo dnf install lld clang
