@@ -29,12 +29,12 @@ pub fn main_menu_setup(mut commands: Commands, asset_server: Res<AssetServer>) {
         ..default()
     };
 
-    let background = asset_server.load("backgrounds/campfire-menu-background.png");
+    let background = asset_server.load("backgrounds/insect-background.png");
 
     commands.spawn((ImageBundle {
         style: Style {
-            width: Val::Px(1920.0),
-            height: Val::Px(1000.0),
+            width: Val::Percent(100.0),
+            height: Val::Percent(100.0),
             ..default()
         },
         image: UiImage::new(background),
