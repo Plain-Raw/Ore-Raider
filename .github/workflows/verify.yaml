@@ -13,7 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: Swatinem/rust-cache@v2
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: nightly
+          cache: true
       - uses: taiki-e/install-action@v2
         with:
           tool: cargo-hack@0.5,cargo-deny@0.13,just@1,cargo-edit@0.12
