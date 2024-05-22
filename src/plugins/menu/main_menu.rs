@@ -74,7 +74,7 @@ pub fn main_menu_setup(mut commands: Commands, asset_server: Res<AssetServer>) {
                     // Display the game name
                     parent.spawn(
                         TextBundle::from_section(
-                            "The Last Dawn",
+                            "test-title",
                             TextStyle {
                                 font_size: 100.0,
                                 color: TEXT_COLOR,
