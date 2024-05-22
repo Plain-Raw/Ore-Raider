@@ -1,0 +1,12 @@
+titleOnly: true
+
+types:
+  - feat
+  - fix
+  - perf
+  - refactor
+  - test
+  - chore
+  - ci
+  - docs
+  - deprecate
