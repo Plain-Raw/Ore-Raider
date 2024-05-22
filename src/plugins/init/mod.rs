@@ -23,7 +23,7 @@ impl Plugin for InitPlugin {
                 })
                 .set(WindowPlugin {
                     primary_window: Some(Window {
-                        title: "The Last Dawn".into(),
+                        title: "test-title".into(),
                         name: Some("bevy.app".into()),
                         resolution: (1900., 1000.).into(),
                         present_mode: PresentMode::AutoVsync,
