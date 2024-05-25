@@ -51,7 +51,6 @@ pub fn settings_menu_setup(mut commands: Commands) {
                 })
                 .with_children(|parent| {
                     for (action, text) in [
-                        (MenuButtonAction::SettingsDisplay, "Display"),
                         (MenuButtonAction::SettingsSound, "Sound"),
                         (MenuButtonAction::BackToMainMenu, "Back"),
                     ] {

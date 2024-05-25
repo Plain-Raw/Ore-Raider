@@ -1,5 +1,5 @@
 use crate::gamestate::GameState;
-use crate::plugins::init::setup::{DisplayQuality, Volume};
+use crate::plugins::init::setup::{GameMusicVolume, MenuMusicVolume};
 use crate::plugins::menu::menu_plugin;
 use crate::plugins::splash::splash_plugin;
 use bevy::app::{App, Plugin};
@@ -44,8 +44,8 @@ impl Plugin for InitPlugin {
                 }),
         )
         .add_plugins(FrameTimeDiagnosticsPlugin)
-        .insert_resource(DisplayQuality::High)
-        .insert_resource(Volume(7))
+        .insert_resource(MenuMusicVolume(7))
+        .insert_resource(GameMusicVolume(7))
         .init_state::<GameState>()
         .add_systems(Startup, setup)
         .add_plugins((splash_plugin, menu_plugin));
