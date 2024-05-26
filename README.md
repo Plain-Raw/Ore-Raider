@@ -1,4 +1,6 @@
-# The-Last-Dawn
+# Ore-Raider
+
+A dwarf themed factory and tower defense game which plays far in the north.
 
 
 ## Audio attribution
