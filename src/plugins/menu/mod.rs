@@ -21,20 +21,18 @@ pub fn menu_plugin(app: &mut App) {
                 menu_setup,
                 music::pause_menu_music,
                 music::setup_menu_music,
-                crate::plugins::game::sound::game_music_setup,
+                music::setup_game_music,
             )
                 .chain(),
         )
         .add_systems(OnExit(GameState::Menu), music::pause_menu_music)
-        .add_systems(
-            OnExit(GameState::Game),
-            crate::plugins::game::sound::game_music_pause,
-        )
+        .add_systems(OnExit(GameState::Game), music::pause_game_music)
+        .add_systems(OnEnter(GameState::Game), music::game_music_unpause)
         .add_systems(
             Update,
             (
                 music::on_menu_music_volume_change,
-                crate::plugins::game::sound::on_game_volume_change,
+                music::on_game_volume_change,
             ),
         )
         // Systems to handle the main menu screen

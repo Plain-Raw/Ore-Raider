@@ -49,3 +49,56 @@ pub fn on_menu_music_volume_change(
         }
     }
 }
+
+use crate::plugins::init::setup::GameMusicVolume;
+
+pub fn setup_game_music(mut commands: Commands, asset_server: Res<AssetServer>) {
+    commands.spawn((
+        AudioBundle {
+            source: asset_server.load("sounds/nordic-game-music.ogg"),
+            settings: {
+                PlaybackSettings {
+                    mode: PlaybackMode::Loop,
+                    paused: true,
+                    speed: 1.0,
+                    ..default()
+                }
+            },
+        },
+        GameMusic,
+    ));
+}
+
+#[derive(Component)]
+pub struct GameMusic;
+
+pub fn pause_game_music(music_controller: Query<&AudioSink, With<GameMusic>>) {
+    if let Ok(sink) = music_controller.get_single() {
+        sink.stop()
+    }
+}
+
+pub fn game_music_unpause(music_controller: Query<&AudioSink, With<GameMusic>>) {
+    if let Ok(sink) = music_controller.get_single() {
+        sink.play()
+    }
+}
+
+pub fn on_game_volume_change(
+    my_res: Option<Res<GameMusicVolume>>,
+    music_controller: Query<&AudioSink, With<GameMusic>>,
+) {
+    if let Some(my_res) = my_res {
+        // the resource exists
+        if my_res.is_changed() {
+            if let Ok(sink) = music_controller.get_single() {
+                let f = my_res.as_f32();
+                if f == 0. {
+                    sink.set_volume(0.);
+                } else {
+                    sink.set_volume(f.div(10.));
+                }
+            }
+        }
+    }
+}

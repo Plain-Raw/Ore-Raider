@@ -3,7 +3,6 @@ pub mod sound;
 use crate::gamestate::GameState;
 use crate::plugins::colors;
 use crate::plugins::colors::TEXT_COLOR;
-use crate::plugins::game::sound::game_music_unpause;
 use crate::plugins::init::setup::MenuMusicVolume;
 use crate::plugins::menu::despawn_screen;
 use bevy::prelude::*;
@@ -11,7 +10,7 @@ use bevy::prelude::*;
 // This plugin will contain the game. In this case, it's just be a screen that will
 // display the current settings for 5 seconds before returning to the menu
 pub fn game_plugin(app: &mut App) {
-    app.add_systems(OnEnter(GameState::Game), (game_setup, game_music_unpause))
+    app.add_systems(OnEnter(GameState::Game), game_setup)
         .add_systems(Update, game.run_if(in_state(GameState::Game)))
         .add_systems(OnExit(GameState::Game), despawn_screen::<OnGameScreen>);
 }
